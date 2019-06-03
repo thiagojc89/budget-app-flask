@@ -7,12 +7,14 @@ A lot of people around the world don't realize that having money is a good thing
 
 Yeah! I said it, it's good to pay bills, that's is how things work, however not paying them can be very painful or when you have money to pay your bills but you pass the due date. So with that thinking, I decided to build this website to help those people (me) pay their bills on time and visualize their expenses in order to plan new acquisitions.
 
-## Navigation
+### Navigation
 1. Home Page will provide a login and sign-up option.
 
 2. After login or sign up the user is redirected to his/her user page and should have the ability to perform these actions:
    * User should be able to add a deposit, it will require two entries (date, amount).
+   * User should be able to update / delete a deposit.
    * The user should be able to add expenses to the budget, it will require two entries (date, amount).
+   * User should be able to update / delete a expenses.
 
 3. A chart would be placed in the center of the page giving a visualization of the money by Amount X Date.
 
@@ -26,27 +28,33 @@ Yeah! I said it, it's good to pay bills, that's is how things work, however not 
 
 | Method | Path | Action|
 |--------|------|-------|
-| POST | /user/login | Login a user into the website |
-| POST | /user/register | Sign in a new user |
-| PUT | /user | Update user account info |
-| GET | /user | Fecth user data to be present on sreen |
-| DELETE | /user | Delete user account |
+| POST | /auth/login | Login a user into the website |
+| POST | /auth/register | Register a new user |
+| GET | /user/budgetitem | Fecth user data to be present on sreen |
 | POST | /user/budgetitem | add a new expenses to the budget |
+| DELETE | /user/budgetitem | delete a expenses from user budget |
+| PUT | /user/budgetitem | update a expenses from user budget |
 
 
 
 
 # Models
 
-1. User
-    * First Name
-    * Last Name
-    * Email
-    * Password
-    * Budget - relation with budget table
-    * Balance
+### 1. User
+  * First Name
+  * Last Name
+  * Email
+  * Password
+  * Budget - relation with budget table
+  * Balance
 
-2. Budget
-    * Name
-    * Itens
+### 2. Budget
+  * Name
+  * Itens
+
+### 3. Item
+  * Name
+  * Value
+  * Due Date
+  * Payment Date
     
