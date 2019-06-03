@@ -17,8 +17,8 @@
 1. Home Page will provide a login and sign-up option.
 
 2. After login or sign up the user is redirected to his/her user page and should have the ability to perform these actions:
-  * User should be able to add a deposit, it will require two entries (date, amount).
-  * The user should be able to add expenses to the budget, it will require two entries (date, amount).
+   * User should be able to add a deposit, it will require two entries (date, amount).
+   * The user should be able to add expenses to the budget, it will require two entries (date, amount).
 
 3. A chart would be placed in the center of the page giving a visualization of the money by Amount X Date.
 
