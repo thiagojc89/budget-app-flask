@@ -58,4 +58,9 @@ Yeah! I said it, it's good to pay bills, that's is how things work, however not 
   * Value
   * Due Date
   * Payment Date
+  
+  
+  
+  This project is using the follow react front-end
+  https://github.com/thiagojc89/budget-app-react
     
