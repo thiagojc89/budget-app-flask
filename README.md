@@ -20,7 +20,7 @@ Yeah! I said it, it's good to pay bills, that's is how things work, however not 
 3. A chart would be placed in the center of the page giving a visualization by Amount(vertical axis) Vs Date (Horizontal axis).
 
 4. The chart will use the registration date as the starting point.
-5. The Chart will show the of 30 days, from the startig point
+5. The Chart will show 30 days, from the startig point
 
 
 
