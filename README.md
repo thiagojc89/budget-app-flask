@@ -23,3 +23,19 @@
 3. A chart would be placed in the center of the page giving a visualization of the money by Amount X Date.
 
 4. The chart will use the registration date as a take the Date axis
+
+
+# Models
+
+1. User
+    * First Name
+    * Last Name
+    * Email
+    * Password
+    * Budget - relation with budget table
+    * Balance
+
+2. Budget
+    * Name
+    * Itens
+    
