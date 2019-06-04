@@ -42,23 +42,29 @@ Yeah! I said it, it's good to pay bills, that's is how things work, however not 
 ### Models
 
 #### 1. User
+  * id (PK)
   * First Name
   * Last Name
   * Email
   * Password
-  * Budget - relation with budget table
   * Balance
 
 #### 2. Budget
+  * id (PK)
   * Name
-  * Itens
+  * Start Date
+  * End Date
+  * User_ID (FK)
 
 #### 3. Item
+  * id (PK)
+  * User_ID (FK)
+  * Budget_ID (FK)
   * Name
   * Value
   * Due Date
   * Payment Date
-  
+  * Transaction
   
   
   This project is using the follow react front-end
