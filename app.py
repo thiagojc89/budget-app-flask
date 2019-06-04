@@ -4,6 +4,7 @@ from flask_cors import CORS
 import config
 import models
 from resources.auth import auth_api
+from resources.user import user_api
 
 app = Flask(__name__)
 login_manager = LoginManager()
@@ -21,11 +22,11 @@ def load_user(userid):
 
 
 CORS(auth_api, origins=[config.CORS_ORIGIN], supports_credentials=True)
-
+CORS(user_api, origins=[config.CORS_ORIGIN], supports_credentials=True)
 
 
 app.register_blueprint(auth_api, url_prefix='/api/v1/auth')
-
+app.register_blueprint(user_api, url_prefix='/api/v1/user')
 
 
 @app.before_request

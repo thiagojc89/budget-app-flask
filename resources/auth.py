@@ -1,14 +1,9 @@
 import json
 import models
 from flask import jsonify, Blueprint, abort, make_response
-
-from flask_restful import (Resource, Api, reqparse,
-                               inputs, fields, marshal,
-                               marshal_with, url_for)
-
 from flask_login import login_user, logout_user, login_required, current_user
-
 from flask_bcrypt import check_password_hash
+from flask_restful import Resource, Api, reqparse, inputs, fields, marshal, marshal_with
 
 
 
