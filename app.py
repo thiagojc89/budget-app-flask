@@ -1,7 +1,7 @@
 from flask import Flask, g
 from flask_login import LoginManager, current_user
 from flask_cors import CORS
-import config
+
 import models
 from resources.auth import auth_api
 from resources.user import user_api
@@ -10,6 +10,10 @@ import os
 app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+if 'ON_HEROKU' not in environ:
+	import config
 
 app.secret_key = config.SECRET_KEY
 
