@@ -49,7 +49,8 @@ class User(Resource):
 		super().__init__()
 	
 	def get(self):
-		print('GET Route')
+		# item_id is passing as a params
+		item_id = request.args.get('item_id')
 		return 'YOU HIT THE GET ROUTE'
 
 
@@ -64,17 +65,42 @@ class User(Resource):
 
 		return item, 200
 
-
+	@marshal_with(itens_fields)
 	def put(self):
-		print('PUT Route')
-		return 'YOU HIT THE PUT ROUTE'
+		# item_id is passing as a params
+		item_id = request.args.get('item_id')
+		args = self.reqparse.parse_args()
+
+		item_args = {}
+
+		if args['name'] != None:
+			item_args['name'] = args['name']
+
+		if args['value'] != None:
+			item_args['value'] = args['value']
+
+		if args['due_date'] != None:
+			item_args['due_date'] = args['due_date']
+
+		if args['payment_date'] != None:
+			item_args['payment_date'] = args['payment_date']
+
+		if args['transaction'] != None:
+			item_args['transaction'] = args['transaction']
+
+		print('this is what I\'m going to update ', item_args)
+
+
+		query = models.Item.update(**item_args).where(models.Item.id==item_id)
+		query.execute()
+		print (query)
+		return models.Item.get(models.Item.id==item_id), 200
 
 
 	def delete(self):
 		# item_id is passing as a params
 		item_id = request.args.get('item_id')
-		item = models.Item.delete().where(models.Item.id==item_id)
-		
+		query = models.Item.delete().where(models.Item.id==item_id)
 		return 'YOU HIT THE DELETE ROUTE and destroy the item'
 
 user_api = Blueprint('resource.user', __name__)
