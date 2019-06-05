@@ -51,24 +51,31 @@ class User(Resource):
 	def get(self):
 		print('GET Route')
 		return 'YOU HIT THE GET ROUTE'
+
+
 	@marshal_with(itens_fields)
 	def post(self):
-		print('POST Route')
+		# I'm taking the user from the session "current_user"
+		# getting the budget_id from the query params call budget_id
 		args = self.reqparse.parse_args()
 		args.user_id=g.user._get_current_object().id
 		args.budget_id=request.args.get('budget_id')
-
 		item = models.Item.create(**args)
 
 		return item, 200
+
 
 	def put(self):
 		print('PUT Route')
 		return 'YOU HIT THE PUT ROUTE'
 
+
 	def delete(self):
-		print('DESTROY Route')
-		return 'YOU HIT THE DELETE ROUTE'
+		# item_id is passing as a params
+		item_id = request.args.get('item_id')
+		item = models.Item.delete().where(models.Item.id==item_id)
+		
+		return 'YOU HIT THE DELETE ROUTE and destroy the item'
 
 user_api = Blueprint('resource.user', __name__)
 api = Api(user_api)
