@@ -3,10 +3,16 @@ import datetime
 from peewee import *
 from flask_bcrypt import generate_password_hash
 from flask_login import UserMixin
-
 import config
 
-DATABASE = SqliteDatabase(config.DATABASE)
+import os
+from playhouse.db_url import connect
+
+
+if 'ON_HEROKU' in os.environ:
+	DATABASE = connect(os.environ.get('DATABASE_URL'))
+else:
+	DATABASE = SqliteDatabase(config.DATABASE)
 
 class User(UserMixin, Model): 
     id              = PrimaryKeyField(null=False)
