@@ -49,9 +49,18 @@ class User(Resource):
 		super().__init__()
 	
 	def get(self):
-		# item_id is passing as a params
-		item_id = request.args.get('item_id')
-		return 'YOU HIT THE GET ROUTE'
+		# budget_id is passing as a params
+		budget_id = request.args.get('budget_id')
+
+		itens = (models.Item
+			.select()
+			# .select(models.Budget, models.Item)
+			.join(models.Budget)
+			.dicts()
+			.where(models.Budget.id==budget_id)
+		)
+		itens = [marshal(item ,itens_fields) for item in itens]
+		return itens, 200
 
 
 	@marshal_with(itens_fields)
@@ -93,7 +102,6 @@ class User(Resource):
 
 		query = models.Item.update(**item_args).where(models.Item.id==item_id)
 		query.execute()
-		print (query)
 		return models.Item.get(models.Item.id==item_id), 200
 
 
@@ -101,6 +109,7 @@ class User(Resource):
 		# item_id is passing as a params
 		item_id = request.args.get('item_id')
 		query = models.Item.delete().where(models.Item.id==item_id)
+		query.execute()
 		return 'YOU HIT THE DELETE ROUTE and destroy the item'
 
 user_api = Blueprint('resource.user', __name__)
