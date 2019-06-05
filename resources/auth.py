@@ -1,6 +1,7 @@
 import json
 import models
-from flask import jsonify, Blueprint, abort, make_response
+import datetime as dt
+from flask import jsonify, Blueprint, abort, make_response, g
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
 from flask_restful import Resource, Api, reqparse, inputs, fields, marshal, marshal_with
@@ -9,11 +10,17 @@ from flask_restful import Resource, Api, reqparse, inputs, fields, marshal, mars
 
 
 user_fields = {
+	'id': fields.String,
 	'first_name': fields.String,
 	'last_name':fields.String,
 	'email':fields.String,
 	'password':fields.String,
-	'created_at':fields.String
+	'balance':fields.String,
+	'created_at':fields.String,
+	'user_id': fields.String,
+	'name': fields.String,
+	'start_date': fields.String,
+	'end_date': fields.String
 }
 
 
@@ -50,11 +57,21 @@ class User(Resource):
     def post(self):
     	print('hit post route create user')
     	args = self.reqparse.parse_args()
+
+    	print('ARGS in register user', args)
     	user = 	models.User.create_user(**args)
     	login_user(user)
-    	return marshal(user, user_fields), 201
+    	
+    	budget_info={
+    		'user_id': g.user._get_current_object().id,
+    		'name': dt.datetime.now().strftime("%B"),
+    		'start_date': dt.datetime.now(),
+    		'end_date': dt.datetime.now()
+    	}
 
-
+    	print('budget_info in register user', budget_info)
+    	budget = models.Budget.create(**budget_info)
+    	return marshal((user, budget), user_fields), 201
 
 class Login(Resource):
     def __init__(self):

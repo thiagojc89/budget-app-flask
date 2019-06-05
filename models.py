@@ -14,6 +14,7 @@ class User(UserMixin, Model):
     last_name       = CharField()
     email           = CharField()
     password        = CharField()
+    balance			= CharField(default='00,00')
     created_at		= DateTimeField(default=datetime.datetime.now)
 
     class Meta:
@@ -38,7 +39,10 @@ class User(UserMixin, Model):
 
 class Budget(Model):
     id              = PrimaryKeyField(null=False) 
+    user_id			= ForeignKeyField(User, related_name='user')
     name            = CharField()
+    start_date		= CharField()
+    end_date		= CharField()
     created_at      = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
@@ -49,10 +53,12 @@ class Item(Model):
     id              = PrimaryKeyField(null=False)
     user_id         = ForeignKeyField(User, related_name='user')
     budget_id       = ForeignKeyField(Budget, related_name='budget')
-    related_name    = CharField()
+    name 			= CharField()
     value			= CharField()
     due_date		= CharField()
     payment_date	= CharField()
+    transaction		= CharField()
+    created_at      = DateTimeField(default=datetime.datetime.now)
 
     class Meta:
         database = DATABASE
