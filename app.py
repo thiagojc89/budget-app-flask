@@ -22,8 +22,8 @@ def load_user(userid):
         return None
 
 
-CORS(auth_api, origins=[config.CORS_ORIGIN, config.CORS_ORIGIN_REACT], supports_credentials=True)
-CORS(user_api, origins=[config.CORS_ORIGIN, config.CORS_ORIGIN_REACT], supports_credentials=True)
+CORS(auth_api, origins=[config.CORS_ORIGIN, 'https://moneychart.herokuapp.com'], supports_credentials=True)
+CORS(user_api, origins=[config.CORS_ORIGIN, 'https://moneychart.herokuapp.com'], supports_credentials=True)
 
 
 app.register_blueprint(auth_api, url_prefix='/api/v1/auth')
