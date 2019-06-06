@@ -57,20 +57,18 @@ def get():
 	return 'Hello World!'
 
 
-print(__name__, "this is the name o the app")
-print(os.environ,"this is the ENV")
-if __name__ == 'app':
+if 'ON_HEROKU' in os.environ:
+    print('hitting ')
+    print('hitting ')
+    print('hitting ')
+    print('hitting ')
+    print('hitting ')
+    models.initialize()
 
-	if 'ON_HEROKU' in os.environ:
-	    print('hitting ')
-	    print('hitting ')
-	    print('hitting ')
-	    print('hitting ')
-	    print('hitting ')
-	    # models.initialize()
-	print("we are just about to call the DB and run the app")
+if __name__ == '__main__':
+
 	models.initialize()
-	app.run()
+	app.run(debug=True, port=8000)
 
 
 
