@@ -57,7 +57,7 @@ def get():
 	return 'Hello World!'
 
 if __name__ == '__main__':
-
+	
 	if 'ON_HEROKU' in os.environ:
 	    print('hitting ')
 	    print('hitting ')

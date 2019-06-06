@@ -6,11 +6,13 @@ from flask_login import UserMixin
 
 
 import os
+
 from playhouse.db_url import connect
 
 
 
 if 'ON_HEROKU' in os.environ:
+    print('this is the databe I\'m going to connect.  >>>>>', os.environ.get('DATABASE_URL') )
 	DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
 
@@ -73,6 +75,7 @@ class Item(Model):
   
 
 def initialize(): 
+    print('================creating my tables ================')
     DATABASE.connect()
     DATABASE.create_tables([User, Budget, Item], safe=True)
     DATABASE.close()
