@@ -12,7 +12,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-if 'ON_HEROKU' not in environ:
+if 'ON_HEROKU' not in os.environ:
 	import config
 
 app.secret_key = config.SECRET_KEY
