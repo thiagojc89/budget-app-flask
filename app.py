@@ -17,13 +17,13 @@ app.config.from_pyfile('config.py')
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-print('======================')
-print(app.config)
+# print('======================')
+# print(app.config)
 
-app.secret_key = app.config['SECRET_KEY']
-
-
-
+if 'ON_HEROKU' in os.environ:
+	app.secret_key = SECRET_KEY
+else:
+	app.secret_key = app.config['SECRET_KEY']
 
 
 
@@ -61,6 +61,7 @@ def after_request(response):
 @app.route('/')
 def get():
 	return 'Hello World!'
+
 
 if 'ON_HEROKU' in os.environ:
     print('hitting ')

@@ -7,7 +7,7 @@ from flask_login import UserMixin
 
 import os
 from playhouse.db_url import connect
-from flask import current_app
+
 
 
 if 'ON_HEROKU' in os.environ:
