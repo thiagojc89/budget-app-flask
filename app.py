@@ -63,7 +63,7 @@ if 'ON_HEROKU' in os.environ:
 
 if __name__ == '__main__':
 	models.initialize()
-	app.run(debug=app.config['DEBUG'], port=app.config['PORT'])
+	app.run(debug=True, port=8000)
 
 
 
