@@ -15,8 +15,7 @@ if 'ON_HEROKU' in os.environ:
     print('this is the databe I\'m going to connect.  >>>>>', os.environ.get('DATABASE_URL') )
 	DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
-
-	DATABASE = SqliteDatabase('budgetapp.sqlite')
+    DATABASE = SqliteDatabase('budgetapp.sqlite')
 
 class User(UserMixin, Model): 
     id              = PrimaryKeyField(null=False)
