@@ -56,12 +56,12 @@ def after_request(response):
 def get():
 	return 'Hello World!'
 
-
-if 'ON_HEROKU' in os.environ:
-    print('hitting ')
-    models.initialize()
-
 if __name__ == '__main__':
+
+	if 'ON_HEROKU' in os.environ:
+	    print('hitting ')
+	    models.initialize()
+
 	models.initialize()
 	app.run(debug=True, port=8000)
 
