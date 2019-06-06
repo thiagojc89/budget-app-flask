@@ -56,8 +56,11 @@ def after_request(response):
 def get():
 	return 'Hello World!'
 
+
+print(__name__, "this is the name o the app")
+print(os.environ,"this is the ENV")
 if __name__ == '__main__':
-	
+
 	if 'ON_HEROKU' in os.environ:
 	    print('hitting ')
 	    print('hitting ')
@@ -65,7 +68,7 @@ if __name__ == '__main__':
 	    print('hitting ')
 	    print('hitting ')
 	    # models.initialize()
-
+	print("we are just about to call the DB and run the app")
 	models.initialize()
 	app.run()
 
