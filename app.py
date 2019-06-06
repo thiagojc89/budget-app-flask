@@ -1,7 +1,7 @@
 from flask import Flask, g
 from flask_login import LoginManager, current_user
 from flask_cors import CORS
-import config
+# import config
 import models
 from resources.auth import auth_api
 from resources.user import user_api
