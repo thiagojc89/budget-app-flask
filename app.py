@@ -59,7 +59,7 @@ def get():
 
 print(__name__, "this is the name o the app")
 print(os.environ,"this is the ENV")
-if __name__ == '__main__':
+if __name__ == 'app':
 
 	if 'ON_HEROKU' in os.environ:
 	    print('hitting ')
