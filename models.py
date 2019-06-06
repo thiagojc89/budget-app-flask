@@ -7,13 +7,14 @@ from flask_login import UserMixin
 
 import os
 from playhouse.db_url import connect
+from flask import current_app
 
 
 if 'ON_HEROKU' in os.environ:
 	DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
-	import config
-	DATABASE = SqliteDatabase(config.DATABASE)
+
+	DATABASE = SqliteDatabase('budgetapp.sqlite')
 
 class User(UserMixin, Model): 
     id              = PrimaryKeyField(null=False)
