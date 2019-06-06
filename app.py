@@ -10,14 +10,14 @@ import os
 app = Flask(__name__)
 
 
-app.config.from_pyfile('config.py')
+# app.config.from_pyfile('config.py')
 
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-app.secret_key = app.config['SECRET_KEY']
+app.secret_key = 'jasdlfj.adsfjlajr2345458dsf.adsjflkadsf'
 
 
 
@@ -60,10 +60,14 @@ if __name__ == '__main__':
 
 	if 'ON_HEROKU' in os.environ:
 	    print('hitting ')
-	    models.initialize()
+	    print('hitting ')
+	    print('hitting ')
+	    print('hitting ')
+	    print('hitting ')
+	    # models.initialize()
 
 	models.initialize()
-	app.run(debug=True, port=8000)
+	app.run()
 
 
 
