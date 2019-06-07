@@ -2,7 +2,7 @@
 
 
 
-
+import datetime
 import json
 import models
 from flask import jsonify, Blueprint, abort, make_response, request, g
@@ -13,8 +13,8 @@ itens_fields = {
 	"id": fields.String,
     "name": fields.String,
     "value": fields.Price,
-    "due_date": fields.String,
-    "payment_date": fields.String,
+    "due_date": fields.DateTime(dt_format='iso8601'),
+    "payment_date": fields.DateTime(dt_format='iso8601'),
     "transaction": fields.String,
     "user_id": fields.String,
     "budget_id": fields.String,
@@ -78,7 +78,19 @@ class User(Resource):
 		args = self.reqparse.parse_args()
 		args.user_id=g.user._get_current_object().id
 		args.budget_id=request.args.get('budget_id')
+		
+		print('going to create my item')
 		item = models.Item.create(**args)
+
+		print('item create')
+		print (item.due_date)
+
+		print('converting STRING to DATE type')
+
+		item.due_date = datetime.datetime.strptime(item.due_date, '%Y-%m-%d')
+		item.payment_date = datetime.datetime.strptime(item.payment_date, '%Y-%m-%d')
+		print (item.due_date)
+
 
 		return item, 200
 
