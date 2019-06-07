@@ -15,6 +15,8 @@ itens_fields = {
     "value": fields.Price,
     "due_date": fields.DateTime(dt_format='iso8601'),
     "payment_date": fields.DateTime(dt_format='iso8601'),
+    # "due_date": fields.DateTime(dt_format='rfc822'),
+    # "payment_date": fields.DateTime(dt_format='rfc822'),
     "transaction": fields.String,
     "user_id": fields.String,
     "budget_id": fields.String,
@@ -61,12 +63,21 @@ class User(Resource):
 		user_id = g.user._get_current_object().id
 
 		itens = (models.Item
-			.select()
+			.select(models.Item)
 			# .select(models.Budget, models.Item)
 			.join(models.Budget)
-			.dicts()
-			.where(models.Budget.user_id==user_id)
-		)
+			.where(models.Budget.user_id==user_id))
+		# converting the date(string) from the DB to a date datatype
+
+		for i in itens:
+			# print('this is the ITENS >>>> ',i.due_date)
+			# print('this is the ITENS >>>> ',i.payment_date)
+			# print('this is the ITENS >>>> ',type(i.payment_date))
+			# print('this is the ITENS >>>> ',type(i.payment_date))
+
+			i.due_date = datetime.datetime.strptime(i.due_date, '%Y-%m-%d')
+			i.payment_date = datetime.datetime.strptime(i.payment_date, '%Y-%m-%d')
+
 		itens = [marshal(item ,itens_fields) for item in itens]
 		return itens, 200
 
