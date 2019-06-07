@@ -12,12 +12,14 @@ from flask_restful import Resource, Api, reqparse, inputs, fields, marshal, mars
 itens_fields = {
 	"id": fields.String,
     "name": fields.String,
-    "value": fields.String,
+    "value": fields.Price,
     "due_date": fields.String,
     "payment_date": fields.String,
     "transaction": fields.String,
     "user_id": fields.String,
-    "budget_id": fields.String
+    "budget_id": fields.String,
+    "created_at": fields.DateTime
+    # "created_at": fields.String
 }
 
 class User(Resource):

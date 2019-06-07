@@ -50,8 +50,8 @@ class Budget(Model):
 	id              = PrimaryKeyField(null=False) 
 	user_id			= ForeignKeyField(User, related_name='user')
 	name            = CharField()
-	start_date		= CharField()
-	end_date		= CharField()
+	start_date		= DateField(formats='%Y-%m-%d')
+	end_date		= DateField(formats='%Y-%m-%d')
 	created_at      = DateTimeField(default=datetime.datetime.now)
 
 	class Meta:
@@ -63,9 +63,9 @@ class Item(Model):
 	user_id         = ForeignKeyField(User, related_name='user')
 	budget_id       = ForeignKeyField(Budget, related_name='budget')
 	name 			= CharField()
-	value			= CharField()
-	due_date		= CharField()
-	payment_date	= CharField()
+	value			= DecimalField()
+	due_date		= DateField(formats='%Y-%m-%d')
+	payment_date	= DateField(formats='%Y-%m-%d')
 	transaction		= CharField()
 	created_at      = DateTimeField(default=datetime.datetime.now)
 
