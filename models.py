@@ -78,3 +78,5 @@ def initialize():
 	DATABASE.connect()
 	DATABASE.create_tables([User, Budget, Item], safe=True)
 	DATABASE.close()
+
+

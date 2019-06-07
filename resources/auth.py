@@ -77,18 +77,6 @@ class Login(Resource):
     def __init__(self):
 	    self.reqparse = reqparse.RequestParser()
 	    self.reqparse.add_argument(
-	        'first_name',
-	        required=False,
-	        help='No first name provided',
-	        location=['form', 'json']
-	    )
-	    self.reqparse.add_argument(
-	        'last_name',
-	        required=False,
-	        help='No last name provided',
-	        location=['form', 'json']
-	    )
-	    self.reqparse.add_argument(
 	        'email',
 	        required=False,
 	        help='No email provided',

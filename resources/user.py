@@ -1,3 +1,8 @@
+# create a route to get all user info instead of using this.state [... spread operator].
+
+
+
+
 import json
 import models
 from flask import jsonify, Blueprint, abort, make_response, request, g
@@ -50,14 +55,15 @@ class User(Resource):
 	
 	def get(self):
 		# budget_id is passing as a params
-		budget_id = request.args.get('budget_id')
+		# user_id = request.args.get('user_id')
+		user_id = g.user._get_current_object().id
 
 		itens = (models.Item
 			.select()
 			# .select(models.Budget, models.Item)
 			.join(models.Budget)
 			.dicts()
-			.where(models.Budget.id==budget_id)
+			.where(models.Budget.user_id==user_id)
 		)
 		itens = [marshal(item ,itens_fields) for item in itens]
 		return itens, 200
