@@ -76,20 +76,28 @@ class User(Resource):
 		# I'm taking the user from the session "current_user"
 		# getting the budget_id from the query params call budget_id
 		args = self.reqparse.parse_args()
+
+		user_id = g.user._get_current_object().id
+		print('my user is >>>>>', user_id)
+
 		args.user_id=g.user._get_current_object().id
-		args.budget_id=request.args.get('budget_id')
+		# args.budget_id=request.args.get('budget_id')
+
+		budget_id = models.Budget.get(models.Budget.user_id==user_id)
+
+		print('this is my budget id >>>>>> ', budget_id)
+
+
+		args.budget_id = budget_id
 		
-		print('going to create my item')
+		
 		item = models.Item.create(**args)
 
-		print('item create')
-		print (item.due_date)
-
-		print('converting STRING to DATE type')
-
+		
+		# converting the date(string) from the DB to a date datatype
 		item.due_date = datetime.datetime.strptime(item.due_date, '%Y-%m-%d')
 		item.payment_date = datetime.datetime.strptime(item.payment_date, '%Y-%m-%d')
-		print (item.due_date)
+		
 
 
 		return item, 200
