@@ -64,8 +64,8 @@ class Item(Model):
 	budget_id       = ForeignKeyField(Budget, related_name='budget')
 	name 			= CharField()
 	value			= DecimalField()
-	due_date		= DateField(formats='%Y-%m-%d')
-	payment_date	= DateField(formats='%Y-%m-%d')
+	due_date		= DateField(formats='%Y-%m-%d', null=True)
+	payment_date	= DateField(formats='%Y-%m-%d', null=True)
 	transaction		= CharField()
 	created_at      = DateTimeField(default=datetime.datetime.now)
 

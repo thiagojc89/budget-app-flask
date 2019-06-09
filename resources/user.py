@@ -13,8 +13,10 @@ itens_fields = {
 	"id": fields.String,
     "name": fields.String,
     "value": fields.Price,
-    "due_date": fields.DateTime(dt_format='iso8601'),
-    "payment_date": fields.DateTime(dt_format='iso8601'),
+    "due_date": fields.String,
+    "payment_date": fields.String,
+    # "due_date": fields.DateTime(dt_format='iso8601'),
+    # "payment_date": fields.DateTime(dt_format='iso8601'),
     # "due_date": fields.DateTime(dt_format='rfc822'),
     # "payment_date": fields.DateTime(dt_format='rfc822'),
     "transaction": fields.String,
@@ -66,17 +68,18 @@ class User(Resource):
 			.select(models.Item)
 			# .select(models.Budget, models.Item)
 			.join(models.Budget)
-			.where(models.Budget.user_id==user_id))
+			.where(models.Budget.user_id==user_id)
+			.order_by(models.Item.payment_date))
 		# converting the date(string) from the DB to a date datatype
 
-		for i in itens:
-			# print('this is the ITENS >>>> ',i.due_date)
-			# print('this is the ITENS >>>> ',i.payment_date)
-			# print('this is the ITENS >>>> ',type(i.payment_date))
-			# print('this is the ITENS >>>> ',type(i.payment_date))
+		# for i in itens:
+		# 	# print('this is the ITENS >>>> ',i.due_date)
+		# 	# print('this is the ITENS >>>> ',i.payment_date)
+		# 	# print('this is the ITENS >>>> ',type(i.payment_date))
+		# 	# print('this is the ITENS >>>> ',type(i.payment_date))
 
-			i.due_date = datetime.datetime.strptime(i.due_date, '%Y-%m-%d')
-			i.payment_date = datetime.datetime.strptime(i.payment_date, '%Y-%m-%d')
+		# 	i.due_date = datetime.datetime.strptime(i.due_date, '%Y-%m-%d')
+		# 	i.payment_date = datetime.datetime.strptime(i.payment_date, '%Y-%m-%d')
 
 		itens = [marshal(item ,itens_fields) for item in itens]
 		return itens, 200
