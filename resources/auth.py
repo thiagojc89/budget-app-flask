@@ -14,7 +14,7 @@ user_fields = {
 	'first_name': fields.String,
 	'last_name':fields.String,
 	'email':fields.String,
-	'password':fields.String,
+	# 'password':fields.String,
 	'balance':fields.String,
 	'created_at':fields.String,
 	'user_id': fields.String,
@@ -105,7 +105,29 @@ class Login(Resource):
     			return marshal(user,user_fields), 200
     		else:
     			return ('User or Password is invalid')
-        
+    
+    def get(self):
+    	
+    	# args = self.reqparse.parse_args()
+    	# # logout_user(user)
+    	# try:
+    	# 	user = models.User.get(models.User.id==g.user._get_current_object().id)
+    	# except models.User.DoesNotExist:
+    	# 	abort(404)
+    	# else:	
+
+    	# 		return marshal(user,user_fields), 200
+    	if current_user.is_authenticated:
+    		return ['true', marshal(g.user._get_current_object(),user_fields)]
+    	else:
+    		return ['false']
+    	# print('this is the user >>>>> ',g.user._get_current_object().first_name)
+    	# logout_user()
+    	# print('vou deslogar....')
+    	# print('this is the user >>>>> ',g.user._get_current_object())
+    	# return 'true'
+
+
 
 auth_api = Blueprint('resources.auth', __name__)
 api = Api(auth_api)
