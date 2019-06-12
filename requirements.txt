@@ -1,5 +1,6 @@
 aniso8601==6.0.0
 bcrypt==3.1.6
+cffi==1.12.3
 Click==7.0
 Flask==1.0.3
 Flask-Bcrypt==0.7.1

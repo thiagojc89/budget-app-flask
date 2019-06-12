@@ -12,7 +12,6 @@ from playhouse.db_url import connect
 
 
 if 'ON_HEROKU' in os.environ:
-	print('this is the databe I\'m going to connect.  >>>>>', os.environ.get('DATABASE_URL') )
 	DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
 	DATABASE = SqliteDatabase('budgetapp.sqlite')
@@ -36,7 +35,7 @@ class User(UserMixin, Model):
 				(cls.email==email)
 				).get()
 		except cls.DoesNotExist:
-			print('>>>>>>>> going to create new user <<<<<<<<<<')
+			
 			user = cls(first_name=first_name, last_name=last_name, email=email, password=password)
 			user.password = generate_password_hash(password)
 			user.save()
@@ -74,7 +73,7 @@ class Item(Model):
   
 
 def initialize(): 
-	print('================creating my tables ================')
+	
 	DATABASE.connect()
 	DATABASE.create_tables([User, Budget, Item], safe=True)
 	DATABASE.close()
