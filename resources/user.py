@@ -1,5 +1,5 @@
 # create a route to get all user info instead of using this.state [... spread operator].
-
+# Overall, I love this cover letter. It's warm and engaging. Go with it for this job! For future cover letters, It is a little on the long side, and I want to see more customization to the job you are applying to - meaning I want to see you mention something about what they are looking for in the job description and then make a clear connection between that and what skills and experience you have. I don't get that from this cover letter. Still, I think this one is good to go and I think you should get it out the door ASAP! :)
 
 
 import datetime
@@ -12,7 +12,7 @@ from flask_restful import Resource, Api, reqparse, inputs, fields, marshal, mars
 itens_fields = {
 	"id": fields.String,
     "name": fields.String,
-    "value": fields.Price,
+    "value": fields.Price(decimals=2),
     "due_date": fields.String,
     "payment_date": fields.String,
     # "due_date": fields.DateTime(dt_format='iso8601'),
