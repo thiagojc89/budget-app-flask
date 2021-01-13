@@ -16,8 +16,9 @@ app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
-app.secret_key = 'jasdlfj.adsfjlajr2345458dsf.adsjflkadsf'
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.secret_key = "ALFJKSALFKSAKLJASLAKF" ## Need this to encode the session
 app.config.update(
   SESSION_COOKIE_SECURE=True,
   SESSION_COOKIE_SAMESITE='None'
@@ -28,7 +29,7 @@ app.config.update(
 @login_manager.user_loader
 def load_user(userid):
     try:
-        return models.User.get(userid)
+        return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
         return None
 
