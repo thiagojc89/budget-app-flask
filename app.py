@@ -18,6 +18,10 @@ login_manager.init_app(app)
 
 
 app.secret_key = 'jasdlfj.adsfjlajr2345458dsf.adsjflkadsf'
+app.config.update(
+  SESSION_COOKIE_SECURE=True,
+  SESSION_COOKIE_SAMESITE='None'
+)
 
 
 
