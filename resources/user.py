@@ -62,7 +62,7 @@ class User(Resource):
 	def get(self):
 		# budget_id is passing as a params
 		# user_id = request.args.get('user_id')
-		user_id = g.user._get_current_object().id
+		user_id = current_user
 
 		itens = (models.Item
 			.select(models.Item)

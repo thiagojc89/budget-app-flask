@@ -28,7 +28,7 @@ app.config.update(
 @login_manager.user_loader
 def load_user(userid):
     try:
-        return models.User.get(models.User.id==userid)
+        return models.User.get(userid)
     except models.DoesNotExist:
         return None
 
