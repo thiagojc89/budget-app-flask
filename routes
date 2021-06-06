@@ -1,0 +1,17 @@
+routes
+
+/api/v1/auth
+	POST - /register
+	POST - /login
+	GET - /login (check if user is authenticated)
+	GET - /logout
+
+
+/api/v1/user
+
+	POST - /budgetitem
+	GET - /budgetitem
+	PUT - /budgetitem
+	DELETE - /budgetitem
+
+
