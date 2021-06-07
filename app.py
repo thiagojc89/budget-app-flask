@@ -25,7 +25,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(userid):
     try:
-        return models.User.get(models.User.id == userid)
+        return models.Users.get(models.Users.id == userid)
     except models.DoesNotExist:
         return None
 

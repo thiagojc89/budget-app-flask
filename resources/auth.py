@@ -12,7 +12,7 @@ auth_api = Blueprint('auth', __name__)
 def register():
 	print('hit the register route')
 	payload = request.get_json()
-	user = 	models.User.create_user(**payload)
+	user = 	models.Users.create_user(**payload)
 	login_user(user)
 	
 	budget_info={
@@ -35,8 +35,8 @@ def login():
 	
 	payload = request.get_json()
 	try:
-		user = models.User.get(models.User.email==payload['email'])
-	except models.User.DoesNotExist:
+		user = models.Users.get(models.Users.email==payload['email'])
+	except models.Users.DoesNotExist:
 		return 'User not found'
 	else:	
 		if check_password_hash(user.password, payload['password']):

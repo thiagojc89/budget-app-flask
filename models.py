@@ -11,7 +11,7 @@ if 'ON_HEROKU' in os.environ:
 else:
 	DATABASE = SqliteDatabase('budgetapp.db')
 
-class User(UserMixin, Model): 
+class Users(UserMixin, Model): 
 	id              = PrimaryKeyField(null=False)
 	first_name      = CharField()
 	last_name       = CharField()
@@ -42,7 +42,7 @@ class User(UserMixin, Model):
 
 class Budget(Model):
 	id              = PrimaryKeyField(null=False) 
-	user_id			= ForeignKeyField(User, related_name='user')
+	user_id			= ForeignKeyField(Users, related_name='user')
 	name            = CharField()
 	start_date		= DateField(formats='%Y-%m-%d')
 	end_date		= DateField(formats='%Y-%m-%d')
@@ -54,7 +54,7 @@ class Budget(Model):
 
 class Item(Model):
 	id              = PrimaryKeyField(null=False)
-	user_id         = ForeignKeyField(User, related_name='user')
+	user_id         = ForeignKeyField(Users, related_name='user')
 	budget_id       = ForeignKeyField(Budget, related_name='budget')
 	name 			= CharField()
 	value			= FloatField()
@@ -70,7 +70,7 @@ class Item(Model):
 def initialize(): 
 	
 	DATABASE.connect()
-	DATABASE.create_tables([User, Budget, Item], safe=True)
+	DATABASE.create_tables([Users, Budget, Item], safe=True)
 	DATABASE.close()
 
 
