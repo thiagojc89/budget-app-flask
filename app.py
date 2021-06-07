@@ -53,7 +53,7 @@ def get():
 	return 'Hello World!'
 
 
-if  os.environ.get('FLASK_ENV'=='production'):
+if  os.environ.get('FLASK_ENV')=='production':
     models.initialize()
 
 if __name__ == '__main__':
