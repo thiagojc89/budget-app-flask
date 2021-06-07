@@ -1,20 +1,15 @@
+import os
 import datetime
-
 from peewee import *
 from flask_bcrypt import generate_password_hash
 from flask_login import UserMixin
 
-
-import os
-
 from playhouse.db_url import connect
-
-
 
 if 'ON_HEROKU' in os.environ:
 	DATABASE = connect(os.environ.get('DATABASE_URL'))
 else:
-	DATABASE = SqliteDatabase('budgetapp.sqlite')
+	DATABASE = SqliteDatabase('budgetapp.db')
 
 class User(UserMixin, Model): 
 	id              = PrimaryKeyField(null=False)
@@ -62,7 +57,7 @@ class Item(Model):
 	user_id         = ForeignKeyField(User, related_name='user')
 	budget_id       = ForeignKeyField(Budget, related_name='budget')
 	name 			= CharField()
-	value			= DecimalField()
+	value			= FloatField()
 	due_date		= DateField(formats='%Y-%m-%d', null=True)
 	payment_date	= DateField(formats='%Y-%m-%d', null=True)
 	transaction		= CharField()

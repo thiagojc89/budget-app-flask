@@ -1,29 +1,25 @@
-from flask import Flask, g
+from dotenv import load_dotenv
+load_dotenv() # takes the environment variables from .env
+from flask import Flask
 from flask_login import LoginManager, current_user
 from flask_cors import CORS
-# import config
-import models
 from resources.auth import auth_api
 from resources.user import user_api
 import os
+import models
+
 
 app = Flask(__name__)
 
 
-# app.config.from_pyfile('config.py')
-
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.secret_key = "ALFJKSALFKSAKLJASLAKF" ## Need this to encode the session
+app.secret_key = os.environ.get("SECRET_KEY") ## Need this to encode the session
 app.config.update(
   SESSION_COOKIE_SECURE=True,
   SESSION_COOKIE_SAMESITE='None'
 )
 
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 
 @login_manager.user_loader
@@ -44,18 +40,13 @@ app.register_blueprint(user_api, url_prefix='/api/v1/user')
 
 @app.before_request
 def before_request():
-
-    g.db = models.DATABASE
-    g.db.connect()
-    g.user = current_user
+    models.DATABASE.connect()
 
 
 @app.after_request
 def after_request(response):
-    g.db.close()
+    models.DATABASE.close()
     return response
-
-
 
 @app.route('/')
 def get():
@@ -63,13 +54,9 @@ def get():
 
 
 if 'ON_HEROKU' in os.environ:
-
     models.initialize()
 
 if __name__ == '__main__':
-
-	models.initialize()
-	app.run(debug=True, port=8000)
-
-
+    models.initialize()
+    app.run(port=os.environ.get('PORT'), debug=os.environ.get('DEBUG'))
 
