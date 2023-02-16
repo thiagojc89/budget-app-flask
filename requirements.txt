@@ -14,4 +14,4 @@ psycopg2==2.8.6
 pycparser==2.20
 python-dotenv==0.17.1
 six==1.16.0
-Werkzeug==2.0.1
+Werkzeug==2.2.3
